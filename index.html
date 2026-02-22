@@ -34,10 +34,6 @@
 
         h2 { color: var(--deep-red); font-size: 1.8rem; margin-bottom: 20px; }
 
-        /* Login Section */
-        #login-section { max-width: 400px; margin: 0 auto; }
-        
-        /* Input Styling Fixes */
         input, textarea {
             width: 100%;
             padding: 12px;
@@ -47,16 +43,9 @@
             box-sizing: border-box;
             font-size: 14px;
             outline: none;
-            transition: 0.3s;
         }
 
-        input:focus { border-color: var(--primary-pink); }
-        
-        /* Date field height fix */
-        input[type="date"], input[type="text"] {
-            height: 45px;
-        }
-
+        input[type="date"], input[type="text"] { height: 45px; }
         textarea { height: 80px; resize: none; }
 
         button {
@@ -72,8 +61,8 @@
 
         button:hover { background-color: var(--deep-red); transform: scale(1.05); }
 
-        /* Main Dashboard Section */
-        #dashboard { display: none; }
+        #dashboard, #gallery-section { display: none; }
+
         .couple-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -88,59 +77,70 @@
             border: 2px dashed var(--primary-pink);
         }
 
-        /* Image Upload Area */
         .photo-upload-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
+            width: 120px; height: 120px;
             margin: 15px auto;
             border-radius: 15px;
             background: #fdf2f4;
             border: 2px solid #ffccd5;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             cursor: pointer;
         }
 
-        .preview-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
+        .preview-img { width: 100%; height: 100%; object-fit: cover; display: none; }
+
+        /* --- Gallery Section Styles (ဒီအပိုင်း ကျန်ခဲ့တာပါ) --- */
+        .upload-zone {
+            border: 3px dashed #ffafbd;
+            padding: 30px;
+            border-radius: 20px;
+            background: #fffafa;
+            cursor: pointer;
+            margin-bottom: 30px;
         }
 
-        .upload-placeholder {
-            font-size: 12px;
-            color: #ff758f;
-            text-align: center;
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: 0.3s;
+        }
+
+        .polaroid:nth-child(even) { transform: rotate(3deg); }
+
+        .polaroid img { width: 100%; height: 150px; object-fit: cover; border: 1px solid #eee; }
+
+        .polaroid span {
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            display: block;
+            margin-top: 10px;
+            color: #ff4d6d;
+            font-style: italic;
+            outline: none;
         }
 
         /* Heart Animation */
         .heart-counter {
             margin: 20px auto;
-            width: 160px;
-            height: 160px;
+            width: 160px; height: 160px;
             background: var(--primary-pink);
             clip-path: path("M80 24 C 80 24, 72 0, 40 0 C 8 0, 0 32, 0 56 C 0 96, 80 144, 80 144 C 80 144, 160 96, 160 56 C 160 32, 152 0, 120 0 C 88 0, 80 24, 80 24 Z");
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            animation: beat 1.2s infinite;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; animation: beat 1.2s infinite;
         }
 
-        @keyframes beat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
+        @keyframes beat { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .days-num { font-size: 2rem; font-weight: bold; }
-        
-        #gallery-section { display: none; }
     </style>
 </head>
 <body>
@@ -161,7 +161,6 @@
                 <input type="text" placeholder="His Name">
                 <input type="date" id="anni-date" onchange="calculateDays()">
                 <textarea placeholder="Sweet Note for her..."></textarea>
-                
                 <div class="photo-upload-container" onclick="document.getElementById('imgInput1').click()">
                     <span class="upload-placeholder" id="text1">Add Photo 📸</span>
                     <img id="preview1" class="preview-img">
@@ -174,7 +173,6 @@
                 <input type="text" placeholder="Her Name">
                 <input type="text" value="Our Anniversary" readonly>
                 <textarea placeholder="Sweet Note for him..."></textarea>
-                
                 <div class="photo-upload-container" onclick="document.getElementById('imgInput2').click()">
                     <span class="upload-placeholder" id="text2">Add Photo 📸</span>
                     <img id="preview2" class="preview-img">
@@ -187,37 +185,34 @@
             <div class="days-num" id="result-days">0</div>
             <div style="font-size: 0.9rem;">Days</div>
         </div>
-
         <p style="font-weight: bold; color: var(--deep-red);">Love you more than anything!</p>
         <button onclick="showGallery()">Love Sign ❤️</button>
     </div>
 
-<div id="gallery-section">
-    <h2>☁️ Our Love Cloud</h2>
-    <p>Every photo tells a story of us.</p>
-    
-    <div class="upload-zone" onclick="document.getElementById('galleryInput').click()">
-        <p>Click here to add a new memory 📸</p>
-        <input type="file" id="galleryInput" hidden multiple accept="image/*" onchange="handleGalleryUpload(this)">
-    </div>
-
-    <div id="memory-grid" class="memory-grid">
+    <div id="gallery-section">
+        <h2>☁️ Our Love Cloud</h2>
+        <p>Every photo tells a story of us.</p>
+        <div class="upload-zone" onclick="document.getElementById('galleryInput').click()">
+            <p>Click here to add a new memory 📸</p>
+            <input type="file" id="galleryInput" hidden multiple accept="image/*" onchange="handleGalleryUpload(this)">
         </div>
-
-    <div style="margin-top: 30px;">
-        <button onclick="showDashboard()">Back to Heartbeat</button>
-    </div>
-</div>
-</button>
+        <div id="memory-grid" class="memory-grid"></div>
+        <div style="margin-top: 30px;">
+            <button onclick="showDashboard()">Back to Heartbeat</button>
         </div>
     </div>
 </div>
-
 
 <script>
     function showDashboard() {
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('gallery-section').style.display = 'none';
+    }
+
+    function showGallery() {
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('gallery-section').style.display = 'block';
     }
 
     function calculateDays() {
@@ -244,9 +239,27 @@
         }
     }
 
-    function showGallery() {
-        document.getElementById('dashboard').style.display = 'none';
-        document.getElementById('gallery-section').style.display = 'block';
+    // --- Gallery Upload Function (ဒါလေး ကျန်ခဲ့လို့ ပုံမပေါ်တာပါ) ---
+    function handleGalleryUpload(input) {
+        const grid = document.getElementById('memory-grid');
+        const files = input.files;
+
+        for (let i = 0; i < files.length; i++) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const caption = prompt("ဒီပုံလေးအတွက် အမှတ်တရစာသားလေး ရေးပေးပါဦး...", "Sweet Memory");
+                const finalCaption = (caption === null || caption === "") ? "Sweet Memory" : caption;
+
+                const div = document.createElement('div');
+                div.className = 'polaroid';
+                div.innerHTML = `
+                    <img src="${e.target.result}">
+                    <span contenteditable="true">${finalCaption}</span>
+                `;
+                grid.appendChild(div);
+            }
+            reader.readAsDataURL(files[i]);
+        }
     }
 </script>
 
