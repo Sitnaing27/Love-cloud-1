@@ -1,0 +1,22 @@
+    function previewFile(input, previewId, textId) {
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById(previewId);
+                img.src = e.target.result;
+                img.style.display = 'block';
+                document.getElementById(textId).style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function showGallery() {
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('gallery-section').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
