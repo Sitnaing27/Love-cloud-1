@@ -1,3 +1,23 @@
+/* Gallery Section New Styles */
+.upload-zone {
+    border: 3px dashed #ffafbd;
+    padding: 30px;
+    border-radius: 20px;
+    background: #fffafa;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 30px;
+}
+
+.upload-zone:hover {
+    background: #ffe5ec;
+    border-color: var(--primary-pink);
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
     padding: 10px;
 }
 
@@ -34,5 +54,4 @@
     font-style: italic;
     outline: none; /* Edit လုပ်တဲ့အခါ ဘောင်မပေါ်အောင် */
 }
-
 
