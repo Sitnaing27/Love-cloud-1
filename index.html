@@ -192,15 +192,23 @@
         <button onclick="showGallery()">Love Sign ❤️</button>
     </div>
 
-    <div id="gallery-section">
-        <h2>Our Precious Memories</h2>
-        <p>You can upload more photos here.</p>
-        <input type="file" multiple>
-        <div style="margin-top: 20px;">
-            <button onclick="showDashboard()">Go Back</button>
+ <div id="gallery-section">
+    <h2>☁️ Our Love Cloud</h2>
+    <p>Every photo tells a story of us.</p>
+    
+    <div class="upload-zone" onclick="document.getElementById('galleryInput').click()">
+        <p>Click here to add a new memory 📸</p>
+        <input type="file" id="galleryInput" hidden multiple accept="image/*" onchange="handleGalleryUpload(this)">
+    </div>
+
+    <div id="memory-grid" class="memory-grid">
         </div>
+
+    <div style="margin-top: 30px;">
+        <button onclick="showDashboard()">Back to Heartbeat</button>
     </div>
 </div>
+
 
 <script>
     function showDashboard() {
