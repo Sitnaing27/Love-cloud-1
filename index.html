@@ -182,6 +182,16 @@
         document.getElementById('days').innerText = diff > 0 ? diff : 0;
     }
 
+    function login() {
+    const password = document.getElementById('pass').value;
+    if (password === "1234") { // ဒီနေရာမှာ ကြိုက်တဲ့ password ပြောင်းနိုင်ပါတယ်
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+    } else {
+        alert("Password မှားနေပါတယ်ခင်ဗျာ!");
+    }
+}
+
     function handleUpload(input) {
         const grid = document.getElementById('memory-grid');
         Array.from(input.files).forEach(file => {
