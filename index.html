@@ -3,246 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forever Love Cloud | Our Memory</title>
+    <title>Forever Love Cloud</title>
     <style>
-        /* CSS Section: Design & Animation */
         :root {
             --primary-pink: #ff4d6d;
             --soft-pink: #fff0f3;
             --deep-red: #c9184a;
-            --white: #ffffff;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: #444;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 95%;
             max-width: 900px;
             text-align: center;
-            margin: 20px;
         }
 
-        h2 { color: var(--deep-red); font-size: 2.2rem; margin-bottom: 10px; }
-        p.subtitle { color: #888; margin-bottom: 30px; }
+        .couple-wrapper {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
 
-        /* Login Styling */
-        #login-section { max-width: 350px; margin: 0 auto; }
-        
-        /* Input & Form Elements */
+        .card {
+            flex: 1;
+            min-width: 280px;
+            background: var(--soft-pink);
+            padding: 20px;
+            border-radius: 20px;
+            border: 2.5px dashed var(--primary-pink);
+        }
+
         input, textarea {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             margin: 10px 0;
-            border: 2px solid #eee;
-            border-radius: 15px;
+            border: 1.5px solid #eee;
+            border-radius: 12px;
             box-sizing: border-box;
-            font-size: 1rem;
             outline: none;
-            transition: 0.3s;
         }
-
-        input:focus, textarea:focus { border-color: var(--primary-pink); }
-        input[type="date"] { height: 50px; cursor: pointer; }
 
         button {
             background: var(--primary-pink);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
+            padding: 12px 25px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 1.1rem;
             font-weight: bold;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
         }
 
-        button:hover { background: var(--deep-red); transform: translateY(-3px); }
-
-        /* Dashboard & Grid Layout */
-        #dashboard, #gallery-section { display: none; }
-        
-        .couple-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .card {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 25px;
-            border: 2px dashed var(--primary-pink);
-            position: relative;
-        }
-
-        .card h3 { color: var(--primary-pink); margin-top: 0; }
-
-        /* Heart Pulse Animation */
-        .heart-container {
-            margin: 40px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .heart-shape {
-            width: 180px;
-            height: 180px;
+        .heart-counter {
+            margin: 25px auto;
+            width: 140px; height: 140px;
             background: var(--primary-pink);
-            clip-path: path("M90 27 C 90 27, 81 0, 45 0 C 9 0, 0 36, 0 63 C 0 108, 90 162, 90 162 C 90 162, 180 108, 180 63 C 180 36, 171 0, 135 0 C 99 0, 90 27, 90 27 Z");
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            animation: pulse 1.5s infinite ease-in-out;
+            clip-path: path("M70 21 C 70 21, 63 0, 35 0 C 7 0, 0 28, 0 49 C 0 84, 70 126, 70 126 C 70 126, 140 84, 140 49 C 140 28, 133 0, 105 0 C 77 0, 70 21, 70 21 Z");
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; animation: beat 1.2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
-        }
-
-        .days-count { font-size: 2.8rem; font-weight: bold; }
-
-        /* Memory Gallery Styling */
-        .upload-area {
-            border: 3px dashed #ffafbd;
-            padding: 40px;
-            border-radius: 25px;
-            background: #fffafa;
-            cursor: pointer;
-            margin-bottom: 40px;
-            transition: 0.3s;
-        }
-
-        .upload-area:hover { background: #ffeef2; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
         .memory-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .polaroid {
             background: white;
-            padding: 12px 12px 30px 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            transform: rotate(calc(-3deg + 6deg * Math.random()));
-            transition: 0.3s;
+            padding: 10px 10px 20px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            margin-bottom: 10px;
         }
 
-        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
+        .polaroid img { width: 100%; height: 140px; object-fit: cover; }
 
-        .polaroid img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .polaroid p {
-            font-family: 'Brush Script MT', cursive;
-            margin-top: 15px;
-            font-size: 1.2rem;
-            color: var(--deep-red);
-        }
-
-        /* Responsive Mobile Fix */
-        @media (max-width: 600px) {
-            .couple-grid { grid-template-columns: 1fr; }
-            h2 { font-size: 1.6rem; }
-        }
+        #dashboard, #gallery-section { display: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div id="login-section">
-        <h2>Forever Love Cloud</h2>
-        <p class="subtitle">Enter your secret cloud ☁️</p>
-        <input type="text" id="user" placeholder="Your Name">
-        <input type="password" id="pass" placeholder="Password">
-        <button onclick="login()">Open Our Cloud</button>
+        <h2 style="color: var(--deep-red);">Forever Love Cloud</h2>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button onclick="showDashboard()">Login</button>
     </div>
 
     <div id="dashboard">
-        <h2>Our Love Story</h2>
-        <div class="couple-grid">
+        <h2 style="color: var(--deep-red);">Our Love Story</h2>
+        <div class="couple-wrapper">
             <div class="card">
                 <h3>Him (Male)</h3>
-                <input type="text" placeholder="Boy's Name">
-                <input type="date" id="anniversaryDate" onchange="updateCounter()">
-                <textarea placeholder="Write a note for her..."></textarea>
-                <p style="font-size: 0.8rem; color: #aaa;">Anniversary Date is shared</p>
+                <input type="text" id="him-name" placeholder="His Name" oninput="saveTextData()">
+                <input type="date" id="dateInput" onchange="calcDays(); saveTextData();">
+                <textarea id="him-note" placeholder="Note for her..." oninput="saveTextData()"></textarea>
             </div>
-
             <div class="card">
                 <h3>Her (Female)</h3>
-                <input type="text" placeholder="Girl's Name">
-                <input type="text" value="Our Anniversary" readonly style="background: #f9f9f9;">
-                <textarea placeholder="Write a note for him..."></textarea>
-                <p style="font-size: 0.8rem; color: #aaa;">Forever & Always</p>
+                <input type="text" id="her-name" placeholder="Her Name" oninput="saveTextData()">
+                <input type="text" value="Anniversary Date" readonly style="background: white;">
+                <textarea id="her-note" placeholder="Note for him..." oninput="saveTextData()"></textarea>
             </div>
         </div>
 
-        <div class="heart-container">
-            <div class="heart-shape">
-                <div class="days-count" id="displayDays">0</div>
-                <div style="font-size: 1rem;">Days</div>
-            </div>
-            <h3 style="color: var(--deep-red); margin-top: 20px;">Love you more than anything!</h3>
+        <div class="heart-counter">
+            <div id="days" style="font-size: 2rem; font-weight: bold;">0</div>
+            <div>Days</div>
         </div>
-
-        <button onclick="showGallery()">Love Sign ❤️ (Our Gallery)</button>
+        <button onclick="showGallery()">Love Sign ❤️</button>
     </div>
 
     <div id="gallery-section">
         <h2>☁️ Our Precious Memories</h2>
-        <p class="subtitle">Every photo is a piece of my heart.</p>
-        
-        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-            <p style="font-size: 1.2rem;">Click to upload our sweet memories 📸</p>
-            <input type="file" id="fileInput" hidden multiple accept="image/*" onchange="handleUpload(this)">
-        </div>
-
-        <div id="memoryGrid" class="memory-grid">
-            </div>
-
-        <div style="margin-top: 50px;">
-            <button onclick="showDashboard()">Back to Heartbeat</button>
-        </div>
+        <button onclick="document.getElementById('fileIn').click()">Add New Memory 📸</button>
+        <input type="file" id="fileIn" hidden multiple accept="image/*" onchange="handleUpload(this)">
+        <div id="memory-grid" class="memory-grid"></div>
+        <div style="margin-top: 20px;"><button onclick="showDashboard()">Back</button></div>
     </div>
 </div>
 
 <script>
-    /* JavaScript Section: Logic & Interaction */
+    // စာမျက်နှာ စဖွင့်တာနဲ့ Browser ထဲမှာ သိမ်းထားတာ ရှိမရှိ စစ်မယ်
+    window.onload = function() {
+        if(localStorage.getItem("himName")) document.getElementById("him-name").value = localStorage.getItem("himName");
+        if(localStorage.getItem("herName")) document.getElementById("her-name").value = localStorage.getItem("herName");
+        if(localStorage.getItem("himNote")) document.getElementById("him-note").value = localStorage.getItem("himNote");
+        if(localStorage.getItem("herNote")) document.getElementById("her-note").value = localStorage.getItem("herNote");
+        if(localStorage.getItem("anniDate")) {
+            document.getElementById("dateInput").value = localStorage.getItem("anniDate");
+            calcDays();
+        }
+    };
 
-    function login() {
-        // Simple login bypass for demonstration
-        document.getElementById('login-section').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
+    // စာရိုက်တိုင်း သိမ်းမယ့် Function
+    function saveTextData() {
+        localStorage.setItem("himName", document.getElementById("him-name").value);
+        localStorage.setItem("herName", document.getElementById("her-name").value);
+        localStorage.setItem("himNote", document.getElementById("him-note").value);
+        localStorage.setItem("herNote", document.getElementById("her-note").value);
+        localStorage.setItem("anniDate", document.getElementById("dateInput").value);
     }
 
     function showDashboard() {
-        document.getElementById('gallery-section').style.display = 'none';
+        document.getElementById('login-section').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
     }
 
@@ -251,44 +175,27 @@
         document.getElementById('gallery-section').style.display = 'block';
     }
 
-    function updateCounter() {
-        const inputDate = document.getElementById('anniversaryDate').value;
-        if (!inputDate) return;
-
-        const start = new Date(inputDate);
-        const now = new Date();
-        const diffTime = Math.abs(now - start);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-        
-        document.getElementById('displayDays').innerText = diffDays;
+    function calcDays() {
+        const d = document.getElementById('dateInput').value;
+        if(!d) return;
+        const diff = Math.floor((new Date() - new Date(d)) / (1000*60*60*24));
+        document.getElementById('days').innerText = diff > 0 ? diff : 0;
     }
 
     function handleUpload(input) {
-        const grid = document.getElementById('memoryGrid');
-        const files = input.files;
-
-        for (let i = 0; i < files.length; i++) {
+        const grid = document.getElementById('memory-grid');
+        Array.from(input.files).forEach(file => {
             const reader = new FileReader();
             reader.onload = function(e) {
-                const note = prompt("ဒီပုံလေးအတွက် မှတ်တရစာသားလေး ရေးပေးပါ...", "Happy Moment");
-                
-                const polaroidDiv = document.createElement('div');
-                polaroidDiv.className = 'polaroid';
-                
-                // Random rotation for natural look
-                const randomRot = Math.floor(Math.random() * 10) - 5;
-                polaroidDiv.style.transform = `rotate(${randomRot}deg)`;
-
-                polaroidDiv.innerHTML = `
-                    <img src="${e.target.result}" alt="Memory">
-                    <p contenteditable="true">${note || 'Sweet Memory'}</p>
-                `;
-                grid.appendChild(polaroidDiv);
+                const caption = prompt("မှတ်တရစာလေး ရေးပါ...", "Sweet Memory");
+                const div = document.createElement('div');
+                div.className = 'polaroid';
+                div.innerHTML = `<img src="${e.target.result}"><p style="font-size:0.8rem; margin:5px 0;">${caption || 'Sweet Memory'}</p>`;
+                grid.appendChild(div);
             }
-            reader.readAsDataURL(files[i]);
-        }
+            reader.readAsDataURL(file);
+        });
     }
 </script>
-
 </body>
 </html>
