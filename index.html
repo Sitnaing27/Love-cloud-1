@@ -58,6 +58,13 @@
             outline: none;
         }
 
+        /* Date အကွက် အဖြူရောင်ပေါ်စေရန် */
+        input[type="date"] {
+            background-color: white !important;
+            color: #333 !important;
+            cursor: pointer;
+        }
+
         button {
             background: var(--primary-pink);
             color: white;
@@ -106,8 +113,8 @@
     <div id="login-section">
         <h2 style="color: var(--deep-red);">Forever Love Cloud</h2>
         <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button onclick="showDashboard()">Login</button>
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="login()">Login</button>
     </div>
 
     <div id="dashboard">
@@ -165,8 +172,19 @@
         localStorage.setItem("anniDate", document.getElementById("dateInput").value);
     }
 
+    // Login စစ်ဆေးမည့် Function
+    function login() {
+        const password = document.getElementById('pass').value;
+        if (password === "1234") { // Password 1234 မှန်မှ ဝင်ခွင့်ပြုမည်
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+        } else {
+            alert("Password မှားနေပါတယ်ခင်ဗျာ!");
+        }
+    }
+
     function showDashboard() {
-        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('gallery-section').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
     }
 
@@ -181,16 +199,6 @@
         const diff = Math.floor((new Date() - new Date(d)) / (1000*60*60*24));
         document.getElementById('days').innerText = diff > 0 ? diff : 0;
     }
-
-    function login() {
-    const password = document.getElementById('pass').value;
-    if (password === "1234") { // ဒီနေရာမှာ ကြိုက်တဲ့ password ပြောင်းနိုင်ပါတယ်
-        document.getElementById('login-section').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
-    } else {
-        alert("Password မှားနေပါတယ်ခင်ဗျာ!");
-    }
-}
 
     function handleUpload(input) {
         const grid = document.getElementById('memory-grid');
